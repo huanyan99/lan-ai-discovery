@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import unittest
 
-from local_ai_discovery.network import NetworkSnapshot
+from lan_ai_discovery.network import NetworkSnapshot
 
 
 class TestNetworkSnapshot(unittest.TestCase):
@@ -36,7 +36,7 @@ class TestNetworkSnapshot(unittest.TestCase):
 
 class TestNetworkMonitorListeners(unittest.TestCase):
     def test_listener_notified_on_change(self) -> None:
-        from local_ai_discovery.network import NetworkMonitor
+        from lan_ai_discovery.network import NetworkMonitor
 
         snapshots = [
             NetworkSnapshot.from_addresses(["1.1.1.1"]),
@@ -61,7 +61,7 @@ class TestNetworkMonitorListeners(unittest.TestCase):
         self.assertEqual(calls[0][1].fingerprint, "2.2.2.2")
 
     def test_listener_exception_isolation(self) -> None:
-        from local_ai_discovery.network import NetworkMonitor
+        from lan_ai_discovery.network import NetworkMonitor
 
         snap = NetworkSnapshot.from_addresses(["1.1.1.1"])
 

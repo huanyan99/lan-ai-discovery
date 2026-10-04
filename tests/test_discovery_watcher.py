@@ -5,7 +5,7 @@ from __future__ import annotations
 import time
 import unittest
 
-from local_ai_discovery.browser import DiscoveredService, DiscoveryWatcher
+from lan_ai_discovery.browser import DiscoveredService, DiscoveryWatcher
 
 
 class FakeBrowser:

@@ -1,4 +1,4 @@
-# Local AI Discovery — 通讯协议规范 v1
+# LAN AI Discovery — 通讯协议规范 v1
 
 > 服务类型：`_local-ai._tcp.local.` · 协议版本：`1`
 >
@@ -118,11 +118,11 @@ dns-sd -B _local-ai._tcp
 # Linux (avahi)
 avahi-browse -rtd _local-ai._tcp
 # 本包
-local-ai-discovery browse --json
+lan-ai-discovery browse --json
 ```
 
 ```python
-from local_ai_discovery import discover, discover_one
+from lan_ai_discovery import discover, discover_one
 
 svc = discover_one(vendor="zhipu")     # 局域网里部署了 GLM 的那台机器
 print(svc.base_url, svc.models_list)   # http://192.168.1.5:8000/v1  ('glm-5.3',)

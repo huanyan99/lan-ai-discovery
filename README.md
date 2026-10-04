@@ -1,13 +1,13 @@
 <div align="center">
 
-# Local AI Discovery
+# LAN AI Discovery
 
 **Every AI service on your LAN, remembered by the network itself**
 
 A highly-redundant, highly-available, vendor-agnostic auto-discovery module
 for local AI endpoints — built on standard mDNS / DNS-SD
 
-[![CI](https://github.com/huanyan99/local-ai-discovery/actions/workflows/ci.yml/badge.svg)](./.github/workflows/ci.yml)
+[![CI](https://github.com/huanyan99/lan-ai-discovery/actions/workflows/ci.yml/badge.svg)](./.github/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue)](pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Protocol](https://img.shields.io/badge/protocol-_local--ai._tcp-v1)](docs/PROTOCOL.md)
@@ -27,7 +27,7 @@ but no other device knows where it is.**
 Hard-coded IPs break on DHCP renewal. A central registry is one more thing to
 deploy. Manually configuring every client does not scale.
 
-`local-ai-discovery` solves this with the standard answer networks have had
+`lan-ai-discovery` solves this with the standard answer networks have had
 for two decades: **mDNS / DNS-SD**. The provider broadcasts "who I am, where
 I listen, which protocol I speak, whether I'm healthy" onto the LAN
 (`_local-ai._tcp.local.`); any device on the same network — laptop, phone,
@@ -124,18 +124,18 @@ scope and cannot live stably in URLs — never registered, never relied upon.
 ### Install
 
 ```bash
-pip install local-ai-discovery
+pip install lan-ai-discovery
 ```
 
 ### Announce (provider side, 30 seconds to onboard)
 
 ```bash
 # Multiple endpoints: YAML config (template in config.example.yaml)
-local-ai-discovery announce --config config.yaml
+lan-ai-discovery announce --config config.yaml
 
 # Single endpoint: environment variables
 LOCAL_AI_NAME="My-DeepSeek" LOCAL_AI_PORT=8000 LOCAL_AI_VENDOR=deepseek \
-  local-ai-discovery announce
+  lan-ai-discovery announce
 ```
 
 Then forget about it: network changes re-register automatically, name
@@ -144,9 +144,9 @@ conflicts resolve themselves, Ctrl-C unregisters gracefully.
 ### Browse (consumer side)
 
 ```bash
-local-ai-discovery browse                          # human-readable
-local-ai-discovery browse --json                   # script-friendly
-local-ai-discovery browse --vendor deepseek --status up
+lan-ai-discovery browse                          # human-readable
+lan-ai-discovery browse --json                   # script-friendly
+lan-ai-discovery browse --vendor deepseek --status up
 ```
 
 The protocol is standard, so built-in OS tooling works too:
@@ -159,7 +159,7 @@ avahi-browse -rtd _local-ai._tcp    # Linux
 ### As a library
 
 ```python
-from local_ai_discovery import (
+from lan_ai_discovery import (
     discover, discover_one, DiscoveryWatcher,
     ServiceAnnouncer, HealthChecker, DiscoveryService,
 )

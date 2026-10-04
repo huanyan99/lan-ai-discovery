@@ -6,7 +6,7 @@ import json
 import unittest
 from unittest import mock
 
-from local_ai_discovery.health import HealthChecker, HealthResult, HealthStatus
+from lan_ai_discovery.health import HealthChecker, HealthResult, HealthStatus
 
 
 def _make_checker(**kwargs) -> HealthChecker:
@@ -156,25 +156,25 @@ class TestHealthProbe(unittest.TestCase):
 
 class TestExtractModels(unittest.TestCase):
     def test_openai_shape(self) -> None:
-        from local_ai_discovery.health import _extract_models
+        from lan_ai_discovery.health import _extract_models
 
         body = json.dumps({"data": [{"id": "a"}, {"id": "b"}]}).encode()
         self.assertEqual(_extract_models(body), ("a", "b"))
 
     def test_list_shape(self) -> None:
-        from local_ai_discovery.health import _extract_models
+        from lan_ai_discovery.health import _extract_models
 
         body = json.dumps(["m1", "m2"]).encode()
         self.assertEqual(_extract_models(body), ("m1", "m2"))
 
     def test_models_key_shape(self) -> None:
-        from local_ai_discovery.health import _extract_models
+        from lan_ai_discovery.health import _extract_models
 
         body = json.dumps({"models": ["x"]}).encode()
         self.assertEqual(_extract_models(body), ("x",))
 
     def test_invalid(self) -> None:
-        from local_ai_discovery.health import _extract_models
+        from lan_ai_discovery.health import _extract_models
 
         self.assertIsNone(_extract_models(b"garbage"))
         self.assertIsNone(_extract_models(b"\xff\xfe"))
@@ -186,13 +186,13 @@ if __name__ == "__main__":
 
 class TestIPv6Url(unittest.TestCase):
     def test_v6_host_is_bracketed(self) -> None:
-        from local_ai_discovery.health import HealthChecker
+        from lan_ai_discovery.health import HealthChecker
 
         checker = HealthChecker(port=8000, host="2001:db8::5")
         self.assertEqual(checker._models_url, "http://[2001:db8::5]:8000/v1/models")
 
     def test_v6_relative_models_path(self) -> None:
-        from local_ai_discovery.health import HealthChecker
+        from lan_ai_discovery.health import HealthChecker
 
         checker = HealthChecker(port=8000, host="::1",
                                 base_path="/v1", models_path="/models")

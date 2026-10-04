@@ -1,4 +1,4 @@
-"""CLI entry point: ``python -m local_ai_discovery`` (thin argparse shell).
+"""CLI entry point: ``python -m lan_ai_discovery`` (thin argparse shell).
 
 Two primitives only:
 
@@ -19,7 +19,7 @@ from .browser import discover
 
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="local-ai-discovery",
+        prog="lan-ai-discovery",
         description="Advertise and discover local AI APIs over mDNS",
     )
     parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")

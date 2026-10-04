@@ -5,12 +5,12 @@ from __future__ import annotations
 import unittest
 from unittest import mock
 
-from local_ai_discovery.protocol import ServiceRecord
+from lan_ai_discovery.protocol import ServiceRecord
 
 
 class TestNameConflictSuffixing(unittest.TestCase):
     def _make_announcer(self, zc_instance, **kwargs):
-        from local_ai_discovery import announcer as ann
+        from lan_ai_discovery import announcer as ann
 
         record = ServiceRecord(name="Ollama", port=11434, vendor="ollama")
         patcher = mock.patch.object(ann, "Zeroconf", return_value=zc_instance)
@@ -20,7 +20,7 @@ class TestNameConflictSuffixing(unittest.TestCase):
         return announcer, record
 
     def test_conflict_retries_with_numeric_suffix(self) -> None:
-        from local_ai_discovery import announcer as ann
+        from lan_ai_discovery import announcer as ann
         from zeroconf import NonUniqueNameException
 
         zc = mock.MagicMock()
@@ -38,7 +38,7 @@ class TestNameConflictSuffixing(unittest.TestCase):
         announcer.stop()
 
     def test_permanent_conflict_surfaces_as_error_event(self) -> None:
-        from local_ai_discovery import announcer as ann
+        from lan_ai_discovery import announcer as ann
         from zeroconf import NonUniqueNameException
 
         zc = mock.MagicMock()
@@ -60,7 +60,7 @@ class TestNameConflictSuffixing(unittest.TestCase):
         announcer.stop()
 
     def test_add_records_is_idempotent(self) -> None:
-        from local_ai_discovery import announcer as ann
+        from lan_ai_discovery import announcer as ann
 
         zc = mock.MagicMock()
         record = ServiceRecord(name="GLM", port=8000, vendor="zhipu")
@@ -75,7 +75,7 @@ class TestNameConflictSuffixing(unittest.TestCase):
             announcer.stop()
 
     def test_add_records_announces_new(self) -> None:
-        from local_ai_discovery import announcer as ann
+        from lan_ai_discovery import announcer as ann
 
         zc = mock.MagicMock()
         first = ServiceRecord(name="GLM", port=8000, vendor="zhipu")

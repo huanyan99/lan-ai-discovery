@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import unittest
 
-from local_ai_discovery.protocol import (
+from lan_ai_discovery.protocol import (
     PROTOCOL_VERSION,
     SERVICE_TYPE,
     AuthMode,

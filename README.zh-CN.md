@@ -1,12 +1,12 @@
 <div align="center">
 
-# Local AI Discovery
+# LAN AI Discovery
 
 **让局域网里的每一个 AI 服务，都被网络自己记住**
 
 基于 mDNS / DNS-SD 的局域网 AI 服务自动发现模块 —— 高冗余、高可用、厂商无关、双协议方言
 
-[![CI](https://github.com/huanyan99/local-ai-discovery/actions/workflows/ci.yml/badge.svg)](./.github/workflows/ci.yml)
+[![CI](https://github.com/huanyan99/lan-ai-discovery/actions/workflows/ci.yml/badge.svg)](./.github/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue)](pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Protocol](https://img.shields.io/badge/protocol-_local--ai._tcp-v1)](docs/PROTOCOL.md)
@@ -24,7 +24,7 @@
 
 写死 IP 会在 DHCP 续约后失效，中心注册表需要额外部署，手动配置每个客户端更是不可维护。
 
-`local-ai-discovery` 用网络里已经存在了二十年的标准答案解决这个问题：
+`lan-ai-discovery` 用网络里已经存在了二十年的标准答案解决这个问题：
 **mDNS / DNS-SD**。服务端把「我是谁、地址在哪、说什么协议、是否在线」广播到
 局域网（`_local-ai._tcp.local.`）；任何同网设备——电脑、手机、Agent 工具——
 都能零配置发现它。就像打印机插上网线就出现在打印对话框里一样。
@@ -105,18 +105,18 @@ link-local 地址（`fe80::/10`）因 scope 无法稳定进入 URL，不注册�
 ### 安装
 
 ```bash
-pip install local-ai-discovery
+pip install lan-ai-discovery
 ```
 
 ### 广播（服务提供方，30 秒接入）
 
 ```bash
 # 多端点：YAML 配置（模板见 config.example.yaml）
-local-ai-discovery announce --config config.yaml
+lan-ai-discovery announce --config config.yaml
 
 # 单端点：环境变量
 LOCAL_AI_NAME="My-DeepSeek" LOCAL_AI_PORT=8000 LOCAL_AI_VENDOR=deepseek \
-  local-ai-discovery announce
+  lan-ai-discovery announce
 ```
 
 之后不需要再管它：换网自动重注册，名字冲突自动改名，Ctrl-C 优雅注销。
@@ -124,9 +124,9 @@ LOCAL_AI_NAME="My-DeepSeek" LOCAL_AI_PORT=8000 LOCAL_AI_VENDOR=deepseek \
 ### 发现（消费方）
 
 ```bash
-local-ai-discovery browse                          # 人类可读
-local-ai-discovery browse --json                   # 脚本友好
-local-ai-discovery browse --vendor deepseek --status up
+lan-ai-discovery browse                          # 人类可读
+lan-ai-discovery browse --json                   # 脚本友好
+lan-ai-discovery browse --vendor deepseek --status up
 ```
 
 协议是标准的，系统自带工具同样有效：
@@ -139,7 +139,7 @@ avahi-browse -rtd _local-ai._tcp    # Linux
 ### 作为库嵌入
 
 ```python
-from local_ai_discovery import (
+from lan_ai_discovery import (
     discover, discover_one, DiscoveryWatcher,
     ServiceAnnouncer, HealthChecker, DiscoveryService,
 )

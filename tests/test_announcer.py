@@ -5,8 +5,8 @@ from __future__ import annotations
 import unittest
 from unittest import mock
 
-from local_ai_discovery.network import NetworkSnapshot
-from local_ai_discovery.protocol import ServiceRecord
+from lan_ai_discovery.network import NetworkSnapshot
+from lan_ai_discovery.protocol import ServiceRecord
 
 
 class TestServiceAnnouncer(unittest.TestCase):
@@ -14,28 +14,28 @@ class TestServiceAnnouncer(unittest.TestCase):
         return ServiceRecord(name=name, port=port, **kwargs)
 
     def test_requires_records(self) -> None:
-        from local_ai_discovery.announcer import ServiceAnnouncer
+        from lan_ai_discovery.announcer import ServiceAnnouncer
 
         with self.assertRaises(ValueError):
             ServiceAnnouncer([])
 
     def test_build_info(self) -> None:
-        from local_ai_discovery.announcer import ServiceAnnouncer, _Entry
+        from lan_ai_discovery.announcer import ServiceAnnouncer, _Entry
 
         record = self._make_record(vendor="deepseek")
-        with mock.patch("local_ai_discovery.announcer.Zeroconf") as MockZC:
+        with mock.patch("lan_ai_discovery.announcer.Zeroconf") as MockZC:
             MockZC.return_value = mock.MagicMock()
             announcer = ServiceAnnouncer([record], hostname="testhost")
             info = announcer._build_info(record, ("192.168.1.1",))
             self.assertIsNotNone(info)
 
     def test_start_register_and_stop_unregister(self) -> None:
-        from local_ai_discovery.announcer import ServiceAnnouncer
+        from lan_ai_discovery.announcer import ServiceAnnouncer
 
         record = self._make_record()
         events: list[tuple[str, str]] = []
 
-        with mock.patch("local_ai_discovery.announcer.Zeroconf") as MockZC:
+        with mock.patch("lan_ai_discovery.announcer.Zeroconf") as MockZC:
             zc_instance = mock.MagicMock()
             MockZC.return_value = zc_instance
 
@@ -59,10 +59,10 @@ class TestServiceAnnouncer(unittest.TestCase):
         self.assertTrue(any(e == "unregistered" for e, _ in events))
 
     def test_update_status(self) -> None:
-        from local_ai_discovery.announcer import ServiceAnnouncer
+        from lan_ai_discovery.announcer import ServiceAnnouncer
 
         record = self._make_record()
-        with mock.patch("local_ai_discovery.announcer.Zeroconf") as MockZC:
+        with mock.patch("lan_ai_discovery.announcer.Zeroconf") as MockZC:
             zc_instance = mock.MagicMock()
             MockZC.return_value = zc_instance
             announcer = ServiceAnnouncer([record], hostname="testhost")
@@ -75,10 +75,10 @@ class TestServiceAnnouncer(unittest.TestCase):
             announcer.stop()
 
     def test_update_addresses_re_registers(self) -> None:
-        from local_ai_discovery.announcer import ServiceAnnouncer
+        from lan_ai_discovery.announcer import ServiceAnnouncer
 
         record = self._make_record()
-        with mock.patch("local_ai_discovery.announcer.Zeroconf") as MockZC:
+        with mock.patch("lan_ai_discovery.announcer.Zeroconf") as MockZC:
             zc_instance = mock.MagicMock()
             MockZC.return_value = zc_instance
             announcer = ServiceAnnouncer([record], hostname="testhost")
@@ -93,14 +93,14 @@ class TestServiceAnnouncer(unittest.TestCase):
             announcer.stop()
 
     def test_multi_endpoint(self) -> None:
-        from local_ai_discovery.announcer import ServiceAnnouncer
+        from lan_ai_discovery.announcer import ServiceAnnouncer
 
         records = [
             self._make_record(name="GLM", port=8001),
             self._make_record(name="DeepSeek", port=8002),
             self._make_record(name="MiMo", port=8003),
         ]
-        with mock.patch("local_ai_discovery.announcer.Zeroconf") as MockZC:
+        with mock.patch("lan_ai_discovery.announcer.Zeroconf") as MockZC:
             zc_instance = mock.MagicMock()
             MockZC.return_value = zc_instance
             announcer = ServiceAnnouncer(records, hostname="testhost")

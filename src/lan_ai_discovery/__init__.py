@@ -5,11 +5,11 @@ Supports OpenAI-compatible and Anthropic (Claude) API dialects.
 
 Layers, each usable standalone:
 
-* :mod:`local_ai_discovery.protocol` — wire format (pure data, no I/O)
-* :class:`local_ai_discovery.ServiceAnnouncer` — high-availability broadcast
-* :func:`local_ai_discovery.discover` / :class:`DiscoveryWatcher` — clients
-* :class:`local_ai_discovery.HealthChecker` — keeps the ``status`` field honest
-* :class:`local_ai_discovery.DiscoveryService` — config-driven orchestrator
+* :mod:`lan_ai_discovery.protocol` — wire format (pure data, no I/O)
+* :class:`lan_ai_discovery.ServiceAnnouncer` — high-availability broadcast
+* :func:`lan_ai_discovery.discover` / :class:`DiscoveryWatcher` — clients
+* :class:`lan_ai_discovery.HealthChecker` — keeps the ``status`` field honest
+* :class:`lan_ai_discovery.DiscoveryService` — config-driven orchestrator
 """
 
 from .protocol import (

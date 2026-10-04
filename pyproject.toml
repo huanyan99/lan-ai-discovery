@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "local-ai-discovery"
+name = "lan-ai-discovery"
 version = "1.0.0"
 description = "Standard mDNS/DNS-SD discovery for local AI endpoints — `_local-ai._tcp.local.` High-availability announce/browse, OpenAI & Anthropic compatible, vendor-agnostic."
 readme = "README.md"
@@ -38,19 +38,19 @@ yaml = ["PyYAML>=6,<7"]
 dev = ["PyYAML>=6,<7"]
 
 [project.scripts]
-local-ai-discovery = "local_ai_discovery.__main__:main"
+lan-ai-discovery = "lan_ai_discovery.__main__:main"
 
 [project.urls]
-Homepage = "https://github.com/huanyan99/local-ai-discovery"
-Repository = "https://github.com/huanyan99/local-ai-discovery"
-Issues = "https://github.com/huanyan99/local-ai-discovery/issues"
-Protocol = "https://github.com/huanyan99/local-ai-discovery/blob/main/docs/PROTOCOL.md"
+Homepage = "https://github.com/huanyan99/lan-ai-discovery"
+Repository = "https://github.com/huanyan99/lan-ai-discovery"
+Issues = "https://github.com/huanyan99/lan-ai-discovery/issues"
+Protocol = "https://github.com/huanyan99/lan-ai-discovery/blob/main/docs/PROTOCOL.md"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/local_ai_discovery"]
+packages = ["src/lan_ai_discovery"]
 
 [tool.hatch.build.targets.sdist]
-include = ["src/local_ai_discovery", "tests", "docs", "README.md", "CHANGELOG.md", "LICENSE"]
+include = ["src/lan_ai_discovery", "tests", "docs", "README.md", "CHANGELOG.md", "LICENSE"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

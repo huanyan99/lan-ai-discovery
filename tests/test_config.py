@@ -7,8 +7,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from local_ai_discovery.config import AppConfig, EndpointConfig, load_config
-from local_ai_discovery.protocol import ServiceRecord
+from lan_ai_discovery.config import AppConfig, EndpointConfig, load_config
+from lan_ai_discovery.protocol import ServiceRecord
 
 
 class TestEndpointConfig(unittest.TestCase):

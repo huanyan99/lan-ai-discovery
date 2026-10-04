@@ -1,0 +1,83 @@
+# Local AI Discovery — 多端点多协议示例
+#
+# 支持 Top-10 主流模型 + 本地推理服务器：
+#   OpenAI / Anthropic(Claude) / Gemini / DeepSeek / Llama
+#   Mistral / Qwen / GLM / Kimi / MiniMax / MiMo / Grok / Ollama / vLLM
+
+discovery:
+  health_interval_s: 30
+  announce_refresh_s: 120
+  network_poll_s: 10
+  health_timeout_s: 3
+
+endpoints:
+  # --- OpenAI 兼容协议 ---
+  - service:
+      name: "DeepSeek-Local"
+    api:
+      port: 8001
+      vendor: "deepseek"
+      auth: "none"
+      base_path: "/v1"
+      models_path: "/v1/models"
+
+  - service:
+      name: "GLM-Local"
+      label: "ChatGLM 4"
+    api:
+      port: 8002
+      vendor: "glm"
+      auth: "none"
+      base_path: "/v1"
+      models_path: "/v1/models"
+
+  - service:
+      name: "Qwen-Local"
+    api:
+      port: 8003
+      vendor: "qwen"
+      auth: "none"
+
+  - service:
+      name: "MiMo-Local"
+    api:
+      port: 8004
+      vendor: "mimo"
+      auth: "none"
+
+  - service:
+      name: "Ollama-Local"
+    api:
+      port: 11434
+      vendor: "ollama"
+      auth: "none"
+      base_path: "/v1"
+      models_path: "/v1/models"
+
+  # --- Anthropic (Claude) 协议 ---
+  - service:
+      name: "Claude-Local"
+      label: "Claude Sonnet"
+    api:
+      port: 8010
+      type: "anthropic"
+      vendor: "anthropic"
+      auth: "api-key"
+      base_path: "/v1"
+      models_path: "/v1/models"
+
+  # --- Gemini (OpenAI 适配) ---
+  - service:
+      name: "Gemini-Local"
+    api:
+      port: 8020
+      vendor: "google"
+      auth: "api-key"
+
+  # --- Llama (vLLM) ---
+  - service:
+      name: "Llama-vLLM"
+    api:
+      port: 8000
+      vendor: "meta"
+      auth: "none"

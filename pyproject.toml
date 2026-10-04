@@ -1,0 +1,57 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "local-ai-discovery"
+version = "1.0.0"
+description = "Standard mDNS/DNS-SD discovery for local AI endpoints — `_local-ai._tcp.local.` High-availability announce/browse, OpenAI & Anthropic compatible, vendor-agnostic."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "huanyan99" }]
+keywords = [
+    "mdns", "dns-sd", "zeroconf", "service-discovery", "local-ai",
+    "openai", "anthropic", "ollama", "vllm", "glm", "deepseek", "qwen",
+    "kimi", "minimax", "mimo", "chatgpt",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: System :: Networking",
+    "Topic :: Software Development :: Libraries",
+]
+dependencies = [
+    "zeroconf>=0.131,<1",
+    "ifaddr>=0.1.7,<1",
+]
+
+[project.optional-dependencies]
+yaml = ["PyYAML>=6,<7"]
+dev = ["PyYAML>=6,<7"]
+
+[project.scripts]
+local-ai-discovery = "local_ai_discovery.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/huanyan99/local-ai-discovery"
+Repository = "https://github.com/huanyan99/local-ai-discovery"
+Issues = "https://github.com/huanyan99/local-ai-discovery/issues"
+Protocol = "https://github.com/huanyan99/local-ai-discovery/blob/main/docs/PROTOCOL.md"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/local_ai_discovery"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/local_ai_discovery", "tests", "docs", "README.md", "CHANGELOG.md", "LICENSE"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
